@@ -36,7 +36,7 @@ The private LexCon / LexO stack is organized around:
 | Architecture narrative | Stable | Can be reviewed externally |
 | Evidence-first methodology | Stable | Safe to describe and reuse |
 | Release policy | Stable | Makes the boundary explicit |
-| Demo plan | Stable | Shows what a bounded demo will prove |
+| Demo interactive prototype | Built | `demo.html` implements all 6 criteria from public-demo-plan.md |
 | Public site shell | Stable | Ready for GitHub and portfolio use |
 
 ## What remains intentionally private

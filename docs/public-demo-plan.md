@@ -44,13 +44,22 @@ Environmental law remains the other core pilot and can be shown as a second exam
 - internal lab clutter
 - anything that makes the demo look broader than it really is
 
-## Release gate
+## Release gate ✓
+- [x] the architecture story is clean
+- [x] the public docs are coherent
+- [x] the evidence narrative is consistent
+- [x] the system can visibly abstain when evidence is insufficient
 
-The demo is ready when:
-- the architecture story is clean
-- the public docs are coherent
-- the evidence narrative is consistent
-- the system can visibly abstain when evidence is insufficient
+## Implementation
+
+The demo is implemented as a single-page interactive prototype (`demo.html`) that simulates the LexCon retrieval pipeline:
+
+- **Client-side knowledge base** with 5 curated labor law queries covering Código del Trabajo, Ley 20.123, and associated jurisprudence
+- **Evidence-first flow:** each query returns candidate evidence with exact textual snippets, review state tags (reviewed/unreviewed), and traceability panels
+- **Abstention behavior:** queries outside the domain (or with insufficient reviewed evidence) return a clear abstention with explanation
+- **Scope disclaimer:** persistent banner clarifying this is a method demo, not legal advice
+- **Visual distinction between reviewed and unreviewed material:** color-coded tags, dot indicators in trace panels, summary counts
+- **Full LexCon visual identity:** dark theme, bento grid, pipeline metaphor, accent glow
 
 ## One-line public description
 
