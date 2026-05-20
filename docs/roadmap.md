@@ -1,31 +1,64 @@
-# Strategic Vision & Roadmap 2026
+# Roadmap 2026-2027
 
-LexCon systems are built with a focus on precision and exponential scalability. Our roadmap reflects a transition from specialized pilot domains to a unified legal reasoning infrastructure.
-
----
-
-## 🟢 Phase 1: The Foundations (Current)
-*Focus: Data Integrity & Pilot Success*
-
-- **Domain Dominance**: Achieve 100% normative and jurisprudential coverage for **Environmental** and **Labor** law.
-- **Fail-Closed Maturity**: Stabilize the LexO engine to ensure zero-hallucination outputs through strict evidence-anchoring.
-- **IndexO Optimization**: Refine high-precision semantic retrieval for specialized legal terminology.
-
-## 🔵 Phase 2: Knowledge Expansion (2026 Q3-Q4)
-*Focus: Relational Intelligence & Access*
-
-- **Canonical Graph Activation**: Transition from semantic search to a verified relational graph (LKG), connecting statutes directly to relevant court rulings.
-- **Citizen-Facing Interfaces**: Launch of Lexito (distilled version) to provide accessible legal clarity for non-lawyers.
-- **Procedural Engine**: Full integration of automated deadline tracking for Chilean civil and labor procedures.
-
-## 🟣 Phase 3: Scalable Ecosystem (2027 & Beyond)
-*Focus: Universal Legal Architecture*
-
-- **Vertical Expansion**: Incorporate Administrative and Civil law domains into the core Knowledge Graph.
-- **Open-API Infrastructure**: Enable secure, validated access to the LKG for third-party legal-tech developers and firms.
-- **Multi-Jurisdiction Design**: Abstract the architecture to support legal systems beyond the Chilean framework, starting with regional partners.
+The roadmap is organized around a single rule: expand only when the evidence path stays inspectable.
 
 ---
 
-### Core Commitment
-We do not build generic AI. We build **Verified Legal Infrastructure**. Our progress is measured not by the complexity of our models, but by the reliability of our validated evidence.
+## Phase 1 — public release hardening
+
+Goal: make the public harness coherent, credible, and easy to review.
+
+Deliverables:
+- cleaned documentation set
+- consistent terminology across pages
+- release notes and policy
+- honest current-status narrative
+- GitHub-friendly presentation without internal clutter
+
+Success criterion:
+- a visitor can understand what the system does, why it matters, and where the limits are in one pass
+
+---
+
+## Phase 2 — bounded demo readiness
+
+Goal: show the method on a constrained legal surface without overclaiming.
+
+Deliverables:
+- one narrow demo flow with evidence inspection
+- explicit abstention example when evidence is weak
+- visible review state transitions
+- repeatable presentation path for public review
+
+Success criterion:
+- the demo proves explainability and fail-closed behavior, not just polished UI
+
+---
+
+## Phase 3 — cautious expansion
+
+Goal: widen coverage without losing traceability.
+
+Deliverables:
+- additional domains only after review gates are stable
+- more structured evidence exports
+- safer product surfaces for public use
+- tighter integration between canonical graph and reasoning harness
+
+Success criterion:
+- new scope can be added without rewriting the core evidence rules
+
+---
+
+## Non-negotiables
+
+- no hype language that outruns the evidence
+- no claim of universal coverage
+- no promotion of weak evidence to truth
+- no public release of private lab material
+- no removal of human review from high-impact relations
+
+## Core commitment
+
+We are not trying to sound smarter than the data.
+We are trying to make legal evidence easier to inspect, review, and trust.

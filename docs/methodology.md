@@ -1,37 +1,50 @@
 # Methodology
 
-## Evidence-First
+## Evidence-first
 
-The project prioritizes verifiable legal evidence over fluent summarization. Relevant relations should be grounded in explicit source text.
+The project prioritizes verifiable legal evidence over fluent summarization.
+Relevant relations should be grounded in explicit source text.
 
-## Fail-Closed
+## Fail-closed
 
 When evidence quality or coverage is insufficient, the system should abstain or escalate to review instead of fabricating certainty.
 
-## Exact Snippets
+## Exact snippets
 
-Evidence references are expected to point to exact snippets or spans, enabling precise legal inspection and reproducibility.
+Evidence references should point to exact snippets or spans whenever possible.
+That makes legal inspection reproducible and lowers the chance of citation drift.
 
-## Human Validation
+## Human validation
 
-Ambiguous legal relations are reviewed by humans before being used as trusted output components.
+Ambiguous legal relations are reviewed by humans before they are treated as trusted output components.
 
-## Mention vs Grounding
+## Mention vs grounding
 
-A key methodological distinction is between:
-- **Mention:** a source cites or references another source contextually.
-- **Grounding/Foundation:** the cited source is materially used to support legal reasoning.
+A key distinction is between:
+- mention: a source references another source contextually
+- grounding: the cited source materially supports the legal reasoning
 
-Conflating these roles produces legal retrieval errors and misleading outputs.
+Conflating those roles creates legal retrieval errors.
 
-## Temporal and Procedural Compliance
+## Traceability
 
-Legal validity depends on timing and procedure. Methodology and architecture must handle temporal state and procedural constraints explicitly, not implicitly.
+A system is only explainable if the chain from claim to evidence can be reconstructed.
+Traceability is therefore a system property, not a stylistic preference.
 
-## Why Explainability Matters in Legal AI
+## Temporal and procedural compliance
 
-In legal contexts, correctness is not enough if reasoning cannot be inspected. Explainability enables:
-- traceability,
-- accountable review,
-- clear uncertainty handling,
-- safer integration into legal research workflows.
+Legal validity depends on time and procedure.
+The architecture and the public story should both respect that reality.
+
+## Why explainability matters
+
+In legal AI, correctness is not enough if the reasoning cannot be inspected.
+Explainability enables:
+- accountable review
+- clearer uncertainty handling
+- safer public communication
+- better integration into legal workflows
+
+## Practical rule
+
+If the evidence is weak, the system should be willing to say so.

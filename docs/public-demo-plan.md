@@ -2,56 +2,56 @@
 
 ## Objective
 
-The public demo will show **explainable legal retrieval** with transparent scope limits. It demonstrates the methodology works on constrained domains.
+Show that the system can retrieve legal material in a way that is explainable, bounded, and honest about uncertainty.
 
-## Guiding Principle
+The demo should prove the method, not oversell the scope.
 
-Release only when evidence and review surfaces are stable enough for credible public interpretation. No vaporware.
+## Demo story
 
-## Expected Demo Components
+A user asks a bounded legal question.
+The system returns:
+- candidate evidence
+- exact textual snippets
+- relation traceability
+- review state where relevant
+- an answer or an abstention, depending on evidence quality
 
-1. **Domain-limited queries**
-   - Labor law or environmental law only
-   - Clear scope disclaimers
+## What the demo must show
 
-2. **Legal graph exploration**
-   - Navigate entities and relations in curated subset
-   - See evidence backing each relation
+1. domain-limited query handling
+2. exact evidence inspection
+3. relation traceability
+4. fail-closed abstention when support is weak
+5. a visible distinction between reviewed and unreviewed material
+6. clear scope disclaimers
 
-3. **Evidence inspection**
-   - Exact snippets supporting relations
-   - Source document links
+## First demo domain
 
-4. **Review workflow glimpse**
-   - How ambiguous relations are handled
-   - Pending vs approved states
+Labor law is the leading candidate because it is:
+- practically relevant
+- naturally bounded
+- easy to explain to a public audience
+- compatible with the system's current evidence-first method
 
-5. **Controlled answer examples**
-   - Answer bundles with evidence
-   - Abstention when evidence insufficient
-   - Clear scope and limitation statements
+Environmental law remains the other core pilot and can be shown as a second example when needed.
 
-6. **Limitations display**
-   - What the demo does NOT do
-   - Disclaimers about legal advice
+## What the demo must not show
 
-## Domain for First Demo
+- full legal coverage claims
+- autonomous legal advice
+- unreviewed relations presented as canonical
+- private vault contents
+- internal lab clutter
+- anything that makes the demo look broader than it really is
 
-**Labor law** is the leading candidate:
-- Largest QA corpus
-- Procurador-digital already demonstrates procedural logic
-- High practical relevance
-- Bounded scope
+## Release gate
 
-## Timeline
+The demo is ready when:
+- the architecture story is clean
+- the public docs are coherent
+- the evidence narrative is consistent
+- the system can visibly abstain when evidence is insufficient
 
-- Prerequisite: Complete domain validation checklist
-- Target: Late 2026 Q3 or Q4
-- Quality gate: Stable retrieval metrics, reviewed relations
+## One-line public description
 
-## What Will NOT Be in the Demo
-
-- Full legal coverage claims
-- Autonomous legal advice
-- Real-time court integration
-- Unreviewed relations as authoritative
+An evidence-first legal retrieval demo that shows how grounded legal systems should answer only when the record is strong enough.

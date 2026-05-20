@@ -1,39 +1,39 @@
 # Repository Policy
 
-## Why Documentation-First
+## Purpose of this repository
 
-This repository intentionally serves documentation-first. It provides a public technical overview while implementation matures in private repositories.
+This repository is a public release surface. It exists to explain the architecture, methodology, and release posture of the LexCon / LexO legal IR ecosystem without exposing private operational material.
 
-## Why the Core Remains Private
+## What is public
 
-- **Methodology validation:** proving the approach works on bounded domains first
-- **Evaluation integrity:** benchmarks and quality gates require controlled iteration
-- **Review workflow maturity:** human validation loops being refined before broader exposure
-- **Controlled release:** public surfaces opened gradually to avoid overstating readiness
+- architecture and ecosystem documentation
+- methodology and status pages
+- demo plans and release notes
+- public branding and presentation assets
+- only the material that can be safely explained to a third party
 
-## Public Release Approach
+## What stays private
 
-The strategy is staged:
+- raw corpora and vault contents
+- unreviewed relation stores
+- prompt logs and internal traces
+- experimental drafts that would misrepresent maturity
+- any material with PII or sensitive legal data
 
-1. **Documentation** (current) — architecture, methodology, status
-2. **Constrained demo** — limited domain, transparent limits
-3. **Tools and components** — scrapers, utilities
-4. **Broader surfaces** — as quality justifies
+## Release hygiene rules
 
-## What May Become Public
+1. Keep the public narrative concise and honest.
+2. Prefer exact evidence over promotional language.
+3. Do not imply full coverage when only pilot domains are supported.
+4. Avoid internal lab naming that adds confusion for external readers.
+5. If a page cannot be backed by actual ecosystem state, rewrite it or remove it.
 
-- Domain goldsets (annotated QA pairs)
-- Scrapers and data acquisition tools
-- Evaluation datasets (without source PII)
-- Methodology documentation
+## Public release standard
 
-## What Remains Private
+A page belongs here only if it helps a reviewer answer at least one of these questions:
+- what does the system do?
+- why does it matter?
+- how is it made trustworthy?
+- what is intentionally out of scope?
 
-- Core graph implementation
-- Full vault contents
-- Production retrieval infrastructure
-- Agent orchestration details
-
-## Incremental Confidence
-
-We started with environmental law. Then labor law. Each domain proves the methodology works before expanding further. This is not a "build everything then release" approach — it's "validate incrementally, release responsibly."
+If it does not help with those questions, it probably belongs elsewhere.

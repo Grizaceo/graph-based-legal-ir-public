@@ -1,64 +1,62 @@
 # Current Status
 
-## What Is Operational
+## Public release posture
 
-### Scrapers (Layer 0)
-- PJUD laboral scraper: operational, regular downloads
-- DT investigations: operational
-- SUSESO: operational via JSONP workaround
-- Academia Judicial: operational via Vimeo transcripts
-- LeyChile: bulk download capability
+This repository is ready to function as a public-facing documentation harness.
 
-### Retrieval (Layer 1)
-- IndexO vault: ~3,000 documents indexed
-- BETO encoder: fine-tuned on legal QA
-- MRR@10: 0.6256 (plateaued, hard negatives pending)
-- Domain retrieval: environmental and labor operational
+What is already in place:
+- a static site shell with docs routing
+- a cleaned architecture narrative
+- explicit methodology and policy pages
+- a bounded demo plan
+- release notes for public review
 
-### Review (Layer 2)
-- Windows A/B defined
-- Label taxonomy established
-- Goldset growing (manual addition)
+## What the public repo can honestly claim
 
-### Review Graph (Layer 3)
-- State machine designed
-- Awaiting full implementation
+- the architecture is designed around exact evidence and review states
+- the system abstains when evidence is insufficient
+- ambiguous relations are meant to pass through human review
+- the public site explains the system without exposing private material
 
-### Agents (Layer 5)
-- LexO-Alpha: operational via Telegram
-- 9 subagents defined
-- Normative Interaction Frame methodology established
+## What is operational in the underlying ecosystem
 
-### Applications (Layer 6)
-- Procurador-digital: MVP for labor procedural deadlines
-- Other applications: concept phase
+The private LexCon / LexO stack is organized around:
+- acquisition from approved public sources
+- retrieval with IndexO and sentence-index
+- curation in legal-reviewer
+- promotion through review-graph
+- canonicalization in graph-legal-ir
+- grounded reasoning in LexO
+- constrained public surfaces in LexCon-hub and related apps
 
-## What Is Being Consolidated
+## What is stable enough to show publicly
 
-Current priority work:
-- Hard negative mining for BETO (break MRR plateau)
-- Review graph implementation
-- Graph-Legal-IR canonical population
-- Procurador-digital domain expansion
+| Area | Status | Public implication |
+|---|---|---|
+| Architecture narrative | Stable | Can be reviewed externally |
+| Evidence-first methodology | Stable | Safe to describe and reuse |
+| Release policy | Stable | Makes the boundary explicit |
+| Demo plan | Stable | Shows what a bounded demo will prove |
+| Public site shell | Stable | Ready for GitHub and portfolio use |
 
-## What Remains Private
+## What remains intentionally private
 
-Core repositories remain private during consolidation:
-- indexo-retriever-prod
-- graph-legal-ir (core)
-- lexo-research-lab
-- legal-ecosystem
-- procurar-digital
+- raw vault contents
+- unreviewed relation queues
+- internal prompt stacks
+- lab-only scratch work
+- any material that would confuse a public reader about what is actually shipped
 
-## Public Components
+## Honest limits
 
-This repository serves as the public documentation surface. Future public releases may include:
-- Constrained demos (specific domains)
-- Open-source components (scrapers, tools)
-- Evaluation datasets (goldsets)
+This repository does not claim:
+- full legal coverage
+- autonomous legal advice
+- final product completeness
+- public exposure of the operational corpus
 
-## What Is Not Claimed
-
-- Full legal coverage: only labor and environmental domains operational
-- Perfect retrieval: MRR at 0.62, not 1.0
-- Autonomous legal advice: LexO-Alpha assists, does not replace counsel
+It does claim:
+- explainability
+- traceability
+- abstention on weak evidence
+- a serious release posture

@@ -1,98 +1,97 @@
 # Graph-Based Legal IR
 
-**Evidence-first legal information retrieval for Chilean law.**
+Public documentation and release harness for evidence-first legal information retrieval in Chilean law.
 
-## Project Summary
+This repository is intentionally public-facing. It documents the architecture, methodology, release posture, and demo surface of the LexCon / LexO ecosystem without exposing vault contents, private execution traces, or lab-only implementation details.
 
-This project builds an explainable legal information retrieval system for Chilean law, based on an explicit legal graph, exact textual evidence, and human review of ambiguous legal relations.
+The central promise is simple:
+- exact textual evidence before conclusion
+- traceable relations before promotion
+- fail-closed abstention when evidence is insufficient
+- human review for ambiguous or high-impact relations
 
-We started with **focused domain pilots** — environmental law and labor law — to prove the methodology works on constrained scopes before expanding. This incremental approach lets us validate evidence extraction, review workflows, and retrieval quality on tractable problems first.
+## What this repo is for
 
-The objective is not to generate persuasive legal prose. The objective is to build a **verifiable legal retrieval and reasoning substrate** where each relevant relation can be traced to source text and reviewed under controlled criteria.
+This repo is the public story of a system that does not want to be clever first. It wants to be verifiable first.
 
-## Why This Project Exists
+It packages:
+- the architecture of the layered legal IR stack
+- the evidence-first methodology
+- the current status of the public release surface
+- the release policy and demo plan
+- a compact narrative suitable for GitHub and portfolio review
 
-Traditional legal search returns documents, keywords, or ranked snippets — but not a verifiable legal structure. Legal LLM workflows produce fluent outputs with limited traceability to exact legal evidence.
+## What this repo is not
 
-For legal work, this is a structural problem:
-- Users need to know which source supports which relation
-- Users need to distinguish incidental citation from operative legal grounding
-- Users need explicit uncertainty and abstention behavior when evidence is insufficient
+- not the private vault
+- not the internal notebook of the lab
+- not a claim of full legal coverage
+- not autonomous legal advice
+- not a place for raw corpora, unreviewed outputs, or half-finished internal experiments
 
-This repository documents an engineering direction designed to address those constraints directly.
+## Current ecosystem view
 
-## What Makes This Different
+| Layer | Component | Role |
+|---|---|---|
+| 0 | n8n-judicial | Acquisition and normalization from public legal sources |
+| 1 | IndexO + sentence-index | Retrieval, ranking, and surfacing of candidate evidence |
+| 2 | legal-reviewer | Human curation, labels, and goldset construction |
+| 3 | review-graph | Pending / approved / rejected / expired relation lifecycle |
+| 4 | graph-legal-ir | Canonical graph with hash-backed evidence and human validation gates |
+| 5 | LexO | Reasoning harness and subagent orchestration over grounded evidence |
+| 6 | LexCon-hub + public apps | Public-facing navigation, orientation, and product surfaces |
 
-- **Evidence-first design:** relations are grounded in exact textual evidence, not model paraphrase
-- **Fail-closed answer path:** when evidence is insufficient, the system abstains or routes to review
-- **Human review of ambiguous edges:** legally sensitive ambiguities require explicit human validation
-- **Mention vs grounding distinction:** references that mention a norm vs. references that legally ground reasoning
-- **Explicit legal graph and review workflow:** graph relations, validation states, and review surfaces are first-class system elements
-- **Temporal and procedural compliance:** legal time and process constraints are part of architecture
+## Why this matters
 
-## Incremental Domain Strategy
+Traditional legal search gives documents, keyword hits, or fluent answers without a stable evidence path. This project is built to solve a narrower but more important problem: how to make legal retrieval explainable, auditable, and safe to trust.
 
-We deliberately started with **small, bounded domains** rather than attempting full legal coverage:
+That means the system must be able to say:
+- where a relation came from
+- why it was promoted
+- what evidence supports it
+- when it should refuse to answer
 
-1. **Environmental law pilot** — first domain, proved ingestion-to-retrieval pipeline
-2. **Labor law expansion** — second domain, validated methodology transfer
-3. **Citizen-facing assistant** — simplified retrieval for public use (Lexito)
-4. **Future domains** — expand as methodology matures
+## Evidence of maturity
 
-This approach lets us:
-- Validate each component end-to-end before scaling
-- Catch domain-specific edge cases early
-- Build realistic evaluation benchmarks per domain
-- Avoid overpromising on coverage
+This public release is not vaporware. It already contains:
+- a clean docs shell rendered through `docs.html`
+- a layered architecture map aligned with the current LexCon / LexO ecosystem
+- a methodology page that separates mention from grounding
+- a current-status page that states limits honestly
+- a public demo plan with constrained scope
+- a repository policy that keeps private material private
+- release notes for reviewers and GitHub visitors
 
-## Current Scope
+## Documentation map
 
-- The core development repositories remain private during consolidation
-- This public repository contains documentation, architecture, and project context
-- Several components are already operational (retrieval, agents, scrapers)
-- Public demos planned for constrained surfaces
+- [Architecture](docs/architecture.md) — layered stack and guarantees
+- [Ecosystem](docs/ecosystem.md) — component map across LexCon / LexO
+- [Domains](docs/domains.md) — current domain focus and expansion path
+- [Methodology](docs/methodology.md) — evidence-first and fail-closed principles
+- [Current Status](docs/current-status.md) — honest snapshot of the release surface
+- [Roadmap](docs/roadmap.md) — public-release trajectory
+- [Public Demo Plan](docs/public-demo-plan.md) — what a bounded demo shows
+- [Repository Policy](docs/repository-policy.md) — what stays public vs private
+- [Release Notes](docs/release-notes.md) — narrative summary for GitHub
 
-## System Architecture
+## Short version for GitHub
 
-High-level layered view:
+What it does:
+- documents an evidence-first legal IR architecture
+- explains the review graph and canonical graph split
+- shows how LexO reasons only over grounded material
+- provides a public-facing release harness with clear limits
 
-| Layer | Component | Description |
-|-------|-----------|-------------|
-| 0 | Scrapers | PJUD, DT, SUSESO, Academia Judicial |
-| 1 | IndexO | Retrieval, ranking, BETO fine-tuned encoder |
-| 2 | Legal Reviewer | Human curation and validation |
-| 3 | Review Graph | Intermediate relations, pending review |
-| 4 | Graph-Legal-IR | Canonical graph with hash-verified evidence |
-| 5 | LexO-Alpha | Legal reasoning agent |
-| 6 | Applications | Procurador-digital, Lexito, case-writer |
+Why it matters:
+- legal AI is only useful when its evidence path can be inspected
+- public trust requires abstention, not confident guessing
+- the same architecture that helps researchers also reduces risk for productization
 
-See [architecture](docs/architecture.md) and [ecosystem](docs/ecosystem.md) for details.
-
-## Methodological Guarantees
-
-- **Exact evidence spans** for supported relations
-- **Traceability** from output claims back to identifiable legal sources
-- **Human validation** for ambiguous or high-impact relations
-- **Abstention when evidence insufficient** (fail-closed)
-- **Separation between reviewed and unreviewed material**
-
-## Intended Audiences
-
-- Legal researchers
-- Lawyers and legal analysts
-- Legaltech builders
-- NLP / IR / knowledge graph researchers
-
-## Documentation
-
-- [Architecture](docs/architecture.md) — system design and layers
-- [Ecosystem](docs/ecosystem.md) — full component overview
-- [Domains](docs/domains.md) — current domain coverage
-- [Methodology](docs/methodology.md) — evidence-first approach
-- [Current Status](docs/current-status.md) — what's operational
-- [Roadmap](docs/roadmap.md) — development trajectory
-- [Public Demo Plan](docs/public-demo-plan.md) — planned public surfaces
-- [Repository Policy](docs/repository-policy.md) — release strategy
+Evidence of maturity:
+- layered architecture already defined
+- public docs already structured
+- release narrative already curated
+- demo surface already bounded
 
 ## Contact
 

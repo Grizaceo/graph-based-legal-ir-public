@@ -18,7 +18,6 @@
             vertical-align: middle;
             filter: drop-shadow(0 0 10px rgba(94, 106, 210, 0.5));
         }
-        /* Header Branding - Más grande y protagónico */
         .badge {
             display: inline-flex;
             align-items: center;
@@ -30,7 +29,7 @@
             font-size: 36px;
             font-weight: 700;
             border: 1px solid rgba(94, 106, 210, 0.3);
-            margin-bottom: 32px; /* Reducido de 56px */
+            margin-bottom: 32px;
             text-transform: uppercase;
             letter-spacing: 0.02em;
             box-shadow: 0 0 40px rgba(94, 106, 210, 0.1);
@@ -39,13 +38,11 @@
             width: 52px;
             height: 52px;
         }
-
-        /* Pipeline Nodes - Armonizados entre sí */
         .node h3 {
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 1.8rem; /* Tamaño uniforme para todos los títulos de cuadros */
+            font-size: 1.8rem;
             font-weight: 600;
             color: var(--text-primary);
             margin-bottom: 12px;
@@ -56,8 +53,6 @@
             margin-top: -2px;
             stroke-width: 3.5;
         }
-        
-        /* Eliminar estilos especiales que rompían la armonía del cuadro 4 */
         .node.special h3 {
             font-size: 1.8rem;
             margin-bottom: 12px;
@@ -77,14 +72,14 @@
                 </svg> CON
             </div>
             <h1>Mapping Chile's <br>Legal Complexity.</h1>
-            <p class="lead">Infraestructura agéntica diseñada para mapear la complejidad del derecho chileno mediante grafos de conocimiento validados, garantizando respuestas con trazabilidad absoluta y diseño Fail-Closed.</p>
+            <p class="lead">Evidence-first legal IR for Chilean law: exact textual grounding, explicit review states, and fail-closed reasoning over a bounded, inspectable legal graph.</p>
         </header>
 
         <section class="pipeline-container">
             <div class="node">
                 <span class="node-label">INPUT</span>
                 <h3>01. Sources</h3>
-                <p>Ingesta masiva y normalización de fuentes judiciales y administrativas (PJUD, DT, SUSESO).</p>
+                <p>Ingest and normalize approved legal sources from the public ecosystem.</p>
             </div>
             <div class="node">
                 <span class="node-label">RETRIEVAL</span>
@@ -93,12 +88,12 @@
                     <circle cx="22" cy="22" r="6" fill="#5e6ad2"/>
                     <path d="M22 17V6M22 27V38M17 22H6M27 22H38" stroke="#7170ff" stroke-width="2.5" stroke-linecap="round"/>
                 </svg></h3>
-                <p>Recuperación semántica de alta precisión basada en modelos BETO fine-tuned.</p>
+                <p>Retrieve candidate evidence with the lowest possible ambiguity.</p>
             </div>
             <div class="node">
                 <span class="node-label">VERIFY</span>
                 <h3>03. Review</h3>
-                <p>Validación humana de relaciones en el Review Graph antes de la promoción al grafo canónico.</p>
+                <p>Keep ambiguous relations in human review until they can be defended with evidence.</p>
             </div>
             <div class="node">
                 <span class="node-label">OUTPUT</span>
@@ -107,33 +102,34 @@
                     <circle cx="22" cy="22" r="7" fill="#5e6ad2"/>
                     <path d="M22 17V4M22 27V40M17 22H4M27 22H40" stroke="#7170ff" stroke-width="3" stroke-linecap="round"/>
                 </svg></h3>
-                <p>Razonamiento jurídico asistido que solo opera sobre evidencia verificada por hash.</p>
+                <p>Grounded legal reasoning that abstains when the record is weak.</p>
             </div>
         </section>
 
         <div class="grid">
             <div class="box">
                 <h4>Fail-Closed Logic</h4>
-                <p>Si no hay evidencia en las fuentes canónicas, el sistema se abstiene de declarar. Sin alucinaciones, solo derecho positivo.</p>
+                <p>If there is no strong evidence in the canonical sources, the system abstains. That is a feature, not a failure.</p>
             </div>
             <div class="box">
-                <h4>Especialización Dual</h4>
-                <p>Enfoque actual en dominios de alta densidad regulatoria: Ambiental y Laboral, con cobertura en tiempo real.</p>
+                <h4>Bounded Scope</h4>
+                <p>The public story is anchored in a few clear domains, not in inflated claims of universal legal coverage.</p>
             </div>
             <div class="box">
-                <h4>Grafo de Relaciones</h4>
-                <p>No buscamos texto, buscamos vínculos. Conectamos normas con sentencias, dictámenes y doctrina en una red viva.</p>
+                <h4>Graph of Relations</h4>
+                <p>The goal is not generic text search. The goal is a verifiable network of sources, relations, and review states.</p>
             </div>
         </div>
 
         <nav class="nav-links">
             <a href="docs.html?page=docs/architecture.md" class="btn btn-primary">Arquitectura Técnica</a>
-            <a href="docs.html?page=docs/ecosystem.md" class="btn btn-ghost">Ecosistema (7 Capas)</a>
-            <a href="docs.html?page=docs/roadmap.md" class="btn btn-ghost">Visión & Estrategia</a>
+            <a href="docs.html?page=docs/ecosystem.md" class="btn btn-ghost">Ecosystem Map</a>
+            <a href="docs.html?page=docs/roadmap.md" class="btn btn-ghost">Roadmap</a>
+            <a href="docs.html?page=docs/release-notes.md" class="btn btn-ghost">Release Notes</a>
         </nav>
 
         <footer style="margin-top: 100px; padding-top: 40px; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary); font-size: 13px;">
-            LexCon Systems &bull; Built for legal precision &bull; 2026
+            LexCon Systems &bull; Evidence-first legal IR &bull; 2026
         </footer>
     </div>
 </body>

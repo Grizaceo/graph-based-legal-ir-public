@@ -1,38 +1,74 @@
-# 🌐 The LexCon Ecosystem
+# The LexCon Ecosystem
 
-The LexCon Ecosystem is a decentralized set of tools designed to solve the "Trust Gap" in legal AI. By separating data acquisition, validation, and reasoning into clear layers, we ensure that every response is grounded in verifiable Chilean Law.
-
----
-
-## 🛠️ Component Breakdown
-
-### 📂 Layer 0-1: Data & Retrieval
-- **n8n-judicial**: A set of automated workflows that monitor the PJUD, DT, and SUSESO portals.
-- **IndexO**: A high-performance retrieval engine. It handles tokenization, embedding generation (768 dimensions), and similarity search across the ~3,500 document vault.
-
-### 👥 Layer 2-3: The Trust Layers
-- **Legal Reviewer**: A web interface for lawyers to label documents and validate extracted relations.
-- **Review Graph**: This layer maintains the "Suggested" vs "Canonical" distinction. It handles the lifecycle of knowledge (DRAFT → FROZEN → APPROVED).
-
-### 🤖 Layer 4-5: Reasoning Intelligence
-- **LexO**: The orchestrator agent. It decomposes legal queries into research tasks and coordinates subagents.
-- **Subagent Fleet**: 9 specialized personas (Researcher, Procurador, Judge, Case Designer, etc.) each with its own focus and logic.
-
-### 📱 Layer 6: End-User Applications
-- **Lexito**: Simplified assistant for citizens to understand their rights in labor or environmental conflicts.
-- **Procurador-digital**: A dedicated tool for managing procedural deadlines (plazos) based on the CPC and specialized laws.
-- **Case Writer**: An LLM-powered editor that helps draft legal documents using the evidence from the LKG.
+The LexCon ecosystem is a layered legal infrastructure, not a single model or a single app. Its job is to keep acquisition, review, canonicalization, reasoning, and public presentation separated enough that each layer can be inspected on its own.
 
 ---
 
-## 🏔️ Strategy: Domain-by-Domain
-Instead of a "Horizontal" approach (trying to know all law at once), LexCon follows a **Vertical "Deep Dive" Strategy**:
+## Component map
 
-1.  **Labor Law**: Focused on the nuances of Tutela and Despido.
-2.  **Environmental Law**: Focused on Administrative Law and SEA resolutions.
-3.  **Procedural Law**: Focused on civil and labor procedure deadlines.
+### Layer 0-1: acquisition and retrieval
+- `n8n-judicial` — public-source acquisition and normalization
+- `IndexO` — semantic retrieval and ranking over the legal corpus
+- `sentence-index` — deterministic surfacing and lighter-weight navigation
+
+### Layer 2-3: human review and relation state
+- `legal-reviewer` — labeling, curation, and goldset production
+- `review-graph` — pending / approved / rejected / expired lifecycle for relations
+
+### Layer 4-5: grounded legal reasoning
+- `graph-legal-ir` — canonical graph with promoted relations and evidence gates
+- `LexO` — reasoning harness that operates only over grounded, reviewable material
+- Subagents — specialized workers used inside the reasoning harness when a task benefits from decomposition
+
+### Layer 6: public and product surfaces
+- `LexCon-hub` — public entry point and navigation layer
+- `lexito` — citizen-facing assistant surface
+- `lexo-citizen-assistant` — simplified orientation layer
+- `lexo-case-writer` — drafting support with evidence constraints
+- `procurador-digital` — procedural support for deadlines and workflow
 
 ---
 
-## 📈 Scalability
-The ecosystem is designed to be **provider-agnostic**. While we currently use specialized models like GPT-4o, Claude 3.5, and fine-tuned BETOs, the architecture allows for swapping layers or models as technology evolves without losing the underlying validated knowledge graph.
+## Public vs private boundary
+
+The public repository documents the system; it does not expose the vault, the raw review queues, or internal work-in-progress. That boundary is intentional.
+
+The public story should remain readable without revealing:
+- private corpora
+- raw PII-bearing artifacts
+- unstable prototypes
+- internal scratch notes
+- lab-only shortcuts that would mislead external readers
+
+---
+
+## Current strategic focus
+
+1. evidence-first legal IR
+2. bounded domain pilots
+3. reviewability before canonicalization
+4. public surfaces that can be explained clearly
+5. release hygiene that avoids hype and internal clutter
+
+---
+
+## Domain strategy
+
+The ecosystem currently emphasizes:
+- environmental law
+- labor law
+- procedural support as a downstream application layer
+
+Those domains are not chosen because they are easy. They are chosen because they are legible enough to prove the method.
+
+---
+
+## Scalability posture
+
+The ecosystem is designed to grow without losing traceability.
+
+That means:
+- new domains must inherit the same evidence rules
+- review states must remain explicit
+- canonical promotion must remain human-governed
+- public claims must remain bounded by actual coverage
