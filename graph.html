@@ -445,6 +445,12 @@
     ).join('');
 
     // Extracto / resumen for judicial nodes
+    if (node.type === 'judicial' && node.resultado && node.resultado.length > 20) {
+      html += `<div class="detail-field">
+        <div class="detail-field-label">Resultado</div>
+        <div class="detail-field-value" style="line-height:1.6;font-size:12px;color:#d0d6e0;max-height:200px;overflow-y:auto;">${node.resultado}</div>
+      </div>`;
+    }
     if (node.type === 'judicial' && node.extracto && node.extracto.length > 10) {
       html += `<div class="detail-field">
         <div class="detail-field-label">Extracto</div>
