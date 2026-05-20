@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LexCon · Public Demo</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44' fill='none'><circle cx='22' cy='22' r='18' stroke='%237170ff' stroke-width='2.5' stroke-dasharray='2 4' opacity='0.5'/><circle cx='22' cy='22' r='7' fill='%235e6ad2'/><path d='M22 17V4M22 27V40M17 22H4M27 22H40' stroke='%237170ff' stroke-width='3' stroke-linecap='round'/></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="base.css">
     <style>
@@ -13,7 +14,7 @@
         .demo-layout {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 60px 24px;
+            padding: 80px 24px;
         }
 
         .demo-header {
@@ -223,6 +224,19 @@
         .tag-unreviewed { background: rgba(234, 179, 8, 0.1); color: #eab308; border: 1px solid rgba(234, 179, 8, 0.2); }
         .tag-rejected { background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2); }
         .tag-source { background: rgba(94, 106, 210, 0.1); color: var(--accent-glow); border: 1px solid rgba(94, 106, 210, 0.2); }
+        .simulated-badge {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(234,179,8,0.1);
+            color: #eab308;
+            border: 1px solid rgba(234,179,8,0.25);
+        }
 
         .evidence-card .source-name {
             font-size: 0.85rem;
@@ -315,6 +329,20 @@
             .query-row { flex-direction: column; }
             .demo-header { flex-direction: column; gap: 16px; align-items: flex-start; }
         }
+
+        @media (max-width: 480px) {
+            .demo-layout { padding: 40px 16px; }
+            .disclaimer-banner { padding: 12px 16px; font-size: 0.8rem; }
+            .demo-header { padding-bottom: 24px; margin-bottom: 28px; }
+            .brand-link strong { font-size: 22px; }
+            .brand-link .logo-svg-mini { width: 28px; height: 28px; }
+            .query-panel { padding: 20px; }
+            .example-hints { max-height: 80px; overflow: hidden; }
+            .evidence-card { padding: 14px; }
+            .evidence-card .snippet { font-size: 0.72rem; padding: 8px 10px; }
+            .answer-card { padding: 18px; }
+            .answer-card .verdict { font-size: 1.1rem; }
+        }
     </style>
 </head>
 <body>
@@ -346,7 +374,7 @@
             <strong>Demo de método, no asesoría legal.</strong>
             Esta demo ilustra el flujo de recuperación basada en evidencia sobre derecho laboral chileno.
             Los resultados son simulados para mostrar el comportamiento del sistema. No constituyen asesoría legal.
-            El dominio actual está limitado a derecho laboral (Ley 19.759, Código del Trabajo, jurisprudencia).
+            El dominio actual está limitado a derecho laboral (DFL 1/2002, Código del Trabajo, jurisprudencia).
         </div>
     </div>
 
@@ -359,6 +387,8 @@
             <input type="text" id="query-input" placeholder="Ej: ¿Cuándo procede el fuero sindical?" autofocus>
             <button class="ask-btn" id="ask-btn" onclick="runQuery()">Consultar →</button>
         </div>
+
+        <div class="query-footnote" style="font-size:0.74rem; color:var(--text-tertiary); margin-top:10px; opacity:0.6;">5 consultas disponibles · dominio: laboral</div>
 
         <div class="example-hints">
             <span class="example-hint" onclick="fillQuery('¿Cuándo procede el fuero sindical?')">fuero sindical</span>
@@ -499,12 +529,21 @@ function fillQuery(text) {
 function runQuery() {
     const input = document.getElementById('query-input');
     const query = input.value.trim();
-    if (!query) return;
-
     const btn = document.getElementById('ask-btn');
     const results = document.getElementById('results');
     const answerCard = document.getElementById('answer-card');
     const evidenceSection = document.getElementById('evidence-section');
+
+    // Empty input → subtle feedback
+    if (!query) {
+        results.style.display = 'block';
+        answerCard.innerHTML = '';
+        evidenceSection.innerHTML = `
+            <div style="padding: 20px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; border: 1px solid var(--border-std); border-radius: 8px; opacity: 0.7;">
+                Escribe una consulta para comenzar
+            </div>`;
+        return;
+    }
 
     // Show loading
     results.style.display = 'block';
@@ -564,7 +603,7 @@ function runQuery() {
 
         renderResults(match, answerCard, evidenceSection);
         btn.disabled = false;
-    }, 800 + Math.random() * 800);
+    }, Math.max(300, 800 + Math.random() * 800));
 }
 
 function renderResults(entry, answerCard, evidenceSection) {
@@ -605,9 +644,10 @@ function renderResults(entry, answerCard, evidenceSection) {
             <div class="evidence-meta">
                 <span class="tag tag-source">Fuente</span>
                 <span class="tag ${reviewClass}">${reviewLabel}</span>
+                <span class="simulated-badge">SIMULADO</span>
             </div>
             <div class="source-name">${ev.source}</div>
-            ${ev.snippet ? `<div class="snippet">${ev.snippet}</div>` : `<div class="snippet" style="border-left-color: #eab308; font-style: italic; color: #6b7280;">[Texto pendiente de extracción — fuente identificada pero no revisada]</div>`}
+            ${ev.snippet ? `<div class="snippet">${ev.snippet}</div>` : `<div class="snippet" style="border-left-color: #eab308; font-style: italic; color: #6b7280;"><span class="simulated-badge" style="margin-right:8px;">SIMULADO</span>[Texto pendiente de extracción — fuente identificada pero no revisada]</div>`}
             ${ev.trace && ev.trace.length > 0 ? `<span class="trace-link" onclick="toggleTrace('${traceId}')">▸ Mostrar trazabilidad</span>` : ''}
             <div class="trace-panel" id="${traceId}">
                 <h4>Traza de relación</h4>
