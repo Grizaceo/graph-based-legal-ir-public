@@ -10,15 +10,6 @@ It is meant to be read by humans first: potential collaborators, reviewers, and 
 Legal IR is often presented as if ranking were enough.
 This release says the opposite: in legal work, a useful system must show its evidence, acknowledge its limits, and refuse to overstate confidence.
 
-## Evidence of maturity
-
-- the docs are organized around a stable architecture map
-- the methodology page spells out exact evidence, traceability, and fail-closed behavior
-- the current-status page is explicit about what is public and what stays private
-- the repository policy prevents drift into internal lab material
-- the demo plan explains how the system should be shown publicly
-- the site shell is consistent and GitHub-friendly
-
 ## What changed in this public release
 
 - refreshed ecosystem names and references to match the current LexCon / LexO stack

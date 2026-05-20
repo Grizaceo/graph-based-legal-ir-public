@@ -51,17 +51,6 @@ That means the system must be able to say:
 - what evidence supports it
 - when it should refuse to answer
 
-## Evidence of maturity
-
-This public release is not vaporware. It already contains:
-- a clean docs shell rendered through `docs.html`
-- a layered architecture map aligned with the current LexCon / LexO ecosystem
-- a methodology page that separates mention from grounding
-- a current-status page that states limits honestly
-- a public demo plan with constrained scope
-- a repository policy that keeps private material private
-- release notes for reviewers and GitHub visitors
-
 ## Documentation map
 
 - [Architecture](docs/architecture.md) — layered stack and guarantees
@@ -87,11 +76,6 @@ Why it matters:
 - public trust requires abstention, not confident guessing
 - the same architecture that helps researchers also reduces risk for productization
 
-Evidence of maturity:
-- layered architecture already defined
-- public docs already structured
-- release narrative already curated
-- demo surface already bounded
 
 ## Contact
 
