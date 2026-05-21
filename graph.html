@@ -462,14 +462,13 @@
     // Link BCN para artículos
     if (node.type === 'articulo' && node.lawSlug) {
       const BCN_URLS = {
-        'CODIGO_DEL_TRABAJO': 'https://www.bcn.cl/leychile/navegar?idNorma=1017159',
-        'LEY_16_395': 'https://www.bcn.cl/leychile/navegar?idNorma=160395',
-        'LEY_16_744': 'https://www.bcn.cl/leychile/navegar?idNorma=160744',
+        'CODIGO_DEL_TRABAJO': 'https://www.bcn.cl/leychile/navegar?idNorma=207436',
+        'LEY_16_744': 'https://www.bcn.cl/leychile/navegar?idNorma=28650',
+        'LEY_19_378': 'https://www.bcn.cl/leychile/navegar?idNorma=30745',
       };
       const baseUrl = BCN_URLS[node.lawSlug];
       if (baseUrl) {
-        const url = node.articleNum ? `${baseUrl}&idArticulo=${node.articleNum}` : baseUrl;
-        html += `<div class="detail-field"><a href="${url}" target="_blank" rel="noopener" style="color:var(--accent);font-size:12px;">↗ Ver en BCN</a></div>`;
+        html += `<div class="detail-field"><a href="${baseUrl}" target="_blank" rel="noopener" style="color:var(--accent);font-size:12px;">↗ Ver en BCN</a></div>`;
       }
     }
 
