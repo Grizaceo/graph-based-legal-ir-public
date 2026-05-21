@@ -213,7 +213,11 @@
     <span class="brand-sub">Graphium</span>
   </a>
   <div id="stats-pill">— nodos · — aristas · Derecho Laboral</div>
-  <a href="index.html" class="back-btn">← Volver</a>
+    <div id="search-wrap" style="position:relative;pointer-events:auto;margin-right:10px;">
+    <input id="search-input" placeholder="Buscar nodo…" style="background:var(--bg-panel);border:1px solid var(--border-std);border-radius:8px;padding:6px 12px;font-size:13px;color:var(--text-primary);width:200px;outline:none;backdrop-filter:blur(12px);">
+    <div id="search-results" style="position:absolute;top:110%;left:0;width:100%;background:var(--bg-card);border:1px solid var(--border-std);border-radius:8px;display:none;max-height:240px;overflow-y:auto;z-index:50;"></div>
+  </div>
+<a href="index.html" class="back-btn">← Volver</a>
 </div>
 
 <!-- Left sidebar -->
@@ -389,6 +393,12 @@
     tooltip.style.top = Math.max(y, 8) + 'px';
   });
 
+  // Escape HTML helper
+  function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
   // Detail panel
   const detail = document.getElementById('detail');
   const detailTitle = document.getElementById('detail-title');
@@ -426,6 +436,36 @@
     if (node.community != null) fields.push({ label: 'Comunidad', value: node.community });
     if (node.nodeCategory) fields.push({ label: 'Categoría', value: node.nodeCategory });
     fields.push({ label: 'ID', value: node.id, cls: 'mono' });
+
+    // Texto legal del artículo
+    if (node.type === 'articulo' && node.texto_completo) {
+      const paragraphs = node.texto_completo
+        .replace(/\n\s*\n/g, '\n\n')
+        .split(/\n\n+/)
+        .map(p => p.trim() ? `<p style="margin-bottom:10px;line-height:1.6;">${escapeHtml(p).replace(/\n/g, '<br>')}</p>` : '')
+        .join('');
+      html += `<div class="detail-field">
+        <div class="detail-field-label">Texto legal</div>
+        <div class="detail-field-value" style="max-height:350px;overflow-y:auto;background:rgba(0,0,0,0.25);padding:12px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);font-size:12px;color:#d0d6e0;line-height:1.6;">
+          ${paragraphs || '<em style="color:var(--text-tertiary)">Texto no disponible</em>'}
+        </div>
+      </div>`;
+    }
+
+    // Link BCN para artículos
+    if (node.type === 'articulo' && node.lawSlug) {
+      const BCN_URLS = {
+        'CODIGO_DEL_TRABAJO': 'https://www.bcn.cl/leychile/navegar?idNorma=1017159',
+        'LEY_16_395': 'https://www.bcn.cl/leychile/navegar?idNorma=160395',
+        'LEY_16_744': 'https://www.bcn.cl/leychile/navegar?idNorma=160744',
+      };
+      const baseUrl = BCN_URLS[node.lawSlug];
+      if (baseUrl) {
+        const url = node.articleNum ? `${baseUrl}&idArticulo=${node.articleNum}` : baseUrl;
+        html += `<div class="detail-field"><a href="${url}" target="_blank" rel="noopener" style="color:var(--accent);font-size:12px;">↗ Ver en BCN</a></div>`;
+      }
+    }
+
 
     // Neighbors
     const links = fg.graphData().links;
@@ -539,6 +579,47 @@
   window.addEventListener('resize', () => {
     fg.width(window.innerWidth).height(window.innerHeight);
   });
+
+
+  // Search
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
+  let searchIdx = -1;
+  function doSearch(q) {
+    if (!q || q.length < 2) { searchResults.style.display = 'none'; return; }
+    const qLow = q.toLowerCase();
+    const hits = graphData.nodes.filter(n => {
+      const name = (n.name || n.label || n.id || '').toLowerCase();
+      return name.includes(qLow);
+    }).slice(0, 8);
+    if (!hits.length) { searchResults.innerHTML = '<div style="padding:8px 12px;font-size:12px;color:var(--text-tertiary)">Sin resultados</div>'; searchResults.style.display = 'block'; return; }
+    searchResults.innerHTML = hits.map((n, i) => {
+      const label = n.name || n.label || n.id;
+      const type = TYPE_LABELS[n.type] || n.type;
+      return `<div class="sr-item" data-idx="${i}" data-id="${n.id}" style="padding:7px 12px;cursor:pointer;font-size:12px;color:var(--text-secondary);border-bottom:1px solid var(--border-subtle);" onmouseover="this.style.background='rgba(255,255,255,0.04)'" onmouseout="this.style.background='transparent'">${escapeHtml(label)} <span style="color:var(--text-tertiary);font-size:10px;">${type}</span></div>`;
+    }).join('');
+    searchResults.style.display = 'block';
+    searchResults.querySelectorAll('.sr-item').forEach(el => {
+      el.onclick = () => {
+        const nid = el.dataset.id;
+        const target = graphData.nodes.find(n => n.id === nid);
+        if (target) { focusNode(target); openDetail(target); searchResults.style.display = 'none'; searchInput.value = ''; }
+      };
+    });
+    searchIdx = -1;
+  }
+  searchInput.addEventListener('input', e => doSearch(e.target.value.trim()));
+  searchInput.addEventListener('keydown', e => {
+    const items = searchResults.querySelectorAll('.sr-item');
+    if (e.key === 'ArrowDown') { e.preventDefault(); searchIdx = Math.min(searchIdx + 1, items.length - 1); items.forEach((it, i) => it.style.background = i === searchIdx ? 'rgba(255,255,255,0.06)' : 'transparent'); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); searchIdx = Math.max(searchIdx - 1, -1); items.forEach((it, i) => it.style.background = i === searchIdx ? 'rgba(255,255,255,0.06)' : 'transparent'); }
+    else if (e.key === 'Enter') {
+      if (searchIdx >= 0 && items[searchIdx]) { items[searchIdx].click(); }
+      else { doSearch(searchInput.value.trim()); }
+    }
+    else if (e.key === 'Escape') { searchResults.style.display = 'none'; }
+  });
+  document.addEventListener('click', e => { if (!e.target.closest('#search-wrap')) searchResults.style.display = 'none'; });
 
   // Hide loader
   document.getElementById('loading').style.display = 'none';
