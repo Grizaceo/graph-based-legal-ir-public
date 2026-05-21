@@ -437,6 +437,13 @@
     if (node.nodeCategory) fields.push({ label: 'Categoría', value: node.nodeCategory });
     fields.push({ label: 'ID', value: node.id, cls: 'mono' });
 
+    let html = fields.map(f =>
+      `<div class="detail-field">
+        <div class="detail-field-label">${f.label}</div>
+        <div class="detail-field-value ${f.cls || ''}">${f.value}</div>
+      </div>`
+    ).join('');
+
     // Texto legal del artículo
     if (node.type === 'articulo' && node.texto_completo) {
       const paragraphs = node.texto_completo
@@ -476,13 +483,6 @@
       if (srcId === node.id) neighbors.push({ id: tgtId, dir: '→', type: l.type, note: l.connectionNote || l.evidenceSample || '' });
       else if (tgtId === node.id) neighbors.push({ id: srcId, dir: '←', type: l.type, note: l.connectionNote || l.evidenceSample || '' });
     }
-
-    let html = fields.map(f =>
-      `<div class="detail-field">
-        <div class="detail-field-label">${f.label}</div>
-        <div class="detail-field-value ${f.cls || ''}">${f.value}</div>
-      </div>`
-    ).join('');
 
     // Extracto / resumen for judicial nodes
     if (node.type === 'judicial' && node.resultado && node.resultado.length > 20) {
